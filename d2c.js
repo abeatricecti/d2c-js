@@ -11,6 +11,7 @@
   var fn = function() {
     var anchors = document.querySelectorAll('a[href*="products.gobankingrates.com"]');
     for (let i = 0; i < anchors.length; i++) {
+      //filter to get distinct pubp + query params
       var anchor = anchors[i];
       var url = new URL(anchor.href);
       console.log(url);
