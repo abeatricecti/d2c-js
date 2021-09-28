@@ -1,11 +1,20 @@
 (function() {
 
+  var sendImpression = function(host) {
+    var xhr = new XMLHttpRequest();
+    var url = host + '/t/';
+    xhr.open('POST', url);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify(["/pub/i?pubid=1234","/pub/td?pubid=1234"]));
+  }
+
   var fn = function() {
     var anchors = document.querySelectorAll('a[href*="products.gobankingrates.com"]');
     for (let i = 0; i < anchors.length; i++) {
       var anchor = anchors[i];
       var url = new URL(anchor.href);
       console.log(url);
+      sendImpression(url.origin);
     }
   };
 
