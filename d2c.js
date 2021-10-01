@@ -8,23 +8,35 @@
     xhr.send(JSON.stringify(impressions));
   }
 
-  var getParams = function(path, search) {
-    console.log(path)
+  var getParams = function(pub, search) {
     var params = [
-      "pubid="
+      "pubid="+pub,
     ];
     return "/pub/i?" + params.join('&');
   }
 
-  var fn = function() {
+  var uniqueAnchors = function() {
     var anchors = document.querySelectorAll('a[href*="products.gobankingrates.com"]');
-    var impressions = [];
+    var obj = {};
     for (let i = 0; i < anchors.length; i++) {
-      //TODO filter to get distinct pubp + query params
-      var anchor = anchors[i];
-      var url = new URL(anchor.href);
-      console.log(url);
-      impressions.push(getParams(url.pathname, url.search));
+      var url = new URL(anchors[i].href);
+      var pub = url.pathname.replace('/pub/', '').split('/')[0];
+      var key = pub + url.search;
+      obj[key] = {
+        "pub": pub,
+        "search": url.search
+      };
+    }
+    return obj;
+  }
+
+  var fn = function() {
+    var anchors = uniqueAnchors();
+    var impressions = [];
+    for (let i = 0; i < Object.keys(anchors).length; i++) {
+      var anchor = anchors[Object.keys(anchors)[i]];
+      console.log(anchor);
+      impressions.push(getParams(anchor.pub, anchor.search));
     }
     sendImpressions(url.origin, impressions);
   };
