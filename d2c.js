@@ -2,6 +2,7 @@
   var fn = function() {
     var anchors = {}, impressions = [], xhr = new XMLHttpRequest();
     var query = document.querySelectorAll('a[href*="products.gobankingrates.com/pub/"]');
+    if (query.length < 1) return;
     for (var i = 0; i < query.length; i++) {
       var url = new URL(query[i].href);
       var pub = url.pathname.replace('/pub/', '').split('/')[0];
