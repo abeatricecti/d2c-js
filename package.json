@@ -1,0 +1,23 @@
+{
+  "name": "html",
+  "version": "1.0.0",
+  "description": "",
+  "main": "d2c.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abeatricecti/d2c-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abeatricecti/d2c-js/issues"
+  },
+  "homepage": "https://github.com/abeatricecti/d2c-js#readme",
+  "dependencies": {
+    "nodemon": "^2.0.14"
+  }
+}
