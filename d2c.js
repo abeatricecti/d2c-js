@@ -1,11 +1,10 @@
 (function() {
   var getQP = function(input) {
-    var qParms = {};
+    var qParms = {}, qp = {};
     input.substring(1).split('&').forEach(function(e) {
       var eArr = e.split('=');
       qParms[decodeURIComponent(eArr[0])] = decodeURIComponent(eArr[1]);
     });
-    var qp = {};
     Object.keys(qParms).forEach(function(k) {
       var i = k.indexOf('[');
       if (i === -1) return qp[k] = qParms[k];
@@ -23,12 +22,12 @@
       dfp: qp['dfp'] || null,
       bing: qp['bing'] ? JSON.stringify(qp['bing']) : null,
       adwords: qp['adwords'] ? JSON.stringify(qp['adwords']) : null,
-      targeting: qp['targeting'] ? JSON.stringify(qp['targeting']) : null,
+      targeting: qp['targeting'] ? JSON.stringify(qp['targeting']) : null
     };
     return Object.keys(params)
-        .filter(function(k) { return params[k] != null; })
-        .map(function(k) { return `${k}=${encodeURIComponent(params[k])}`})
-        .join('&');
+      .filter(function(k) { return params[k] != null; })
+      .map(function(k) { return k + "=" + encodeURIComponent(params[k])})
+      .join('&');
   }
   var fn = function() {
     var anchors = {}, impressions = [], xhr = new XMLHttpRequest();
